@@ -20,6 +20,11 @@ notebooks/
 models/
 data/
 
+# Training scripts & outputs
+scripts/train.py
+training_results.png
+confusion_matrix.png
+
 # macOS
 .DS_Store
 
