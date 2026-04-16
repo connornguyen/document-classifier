@@ -1,7 +1,8 @@
 venv/
 data/
 notebooks/
-scripts/
+scripts/train.py
+scripts/generate_data.py
 .git/
 .gitignore
 *.pyc
