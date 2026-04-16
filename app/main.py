@@ -7,7 +7,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 app = FastAPI(
     title="Document Classifier API",
-    description="Classifies text into World, Sports, Business, or Sci/Tech",
+    description="Classifies text in to Invoice, Contract, Report, or Email using a DistilBERT model fine-tuned on business documents.",
     version="2.0.0"
 )
 
@@ -16,8 +16,8 @@ app = FastAPI(
 # We do it ONCE when the server starts — not on every request.
 # If we loaded it inside classify(), every single request would take 2 extra seconds.
 
-MODEL_PATH  = "./models/distilbert-ag-news"
-LABEL_NAMES = ["World", "Sports", "Business", "Sci/Tech"]
+MODEL_PATH  = "./models/distilbert-business"  
+LABEL_NAMES = ["Invoice", "Contract","Report", "Email"]  # same order as in training data
 DEVICE      = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 try:
