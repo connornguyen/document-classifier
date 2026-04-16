@@ -9,19 +9,12 @@ WORKDIR /app
 COPY requirements-docker.txt .
 RUN pip install --no-cache-dir -r requirements-docker.txt
 
-# Copy app code
+# Copy app code and download script
 COPY app/ ./app/
+COPY scripts/download_model.py ./scripts/download_model.py
 
 # Download the model from HuggingFace Hub at build time
-# This keeps model files out of git while still baking them into the image
-RUN python -c "
-from huggingface_hub import snapshot_download
-snapshot_download(
-    repo_id='connorbuild/document-classifier',
-    local_dir='./models/distilbert-business'
-)
-print('Model downloaded successfully')
-"
+RUN python scripts/download_model.py
 
 # Expose the port the API runs on
 EXPOSE 8000
